@@ -3,11 +3,9 @@
 #
 # [60] 第k个排列
 #
-
 # @lc code=start
 class Solution:
     def getPermutation(self, n: int, k: int) -> str:
-
         n_factorial = [0]*(n+1)
         n_factorial[0] = 1
         visited = [False]*(n+1)
@@ -31,9 +29,8 @@ class Solution:
             visited[value] = True
             self.ans += str(value)
             dfs(num_2,j-1)
-
+            
         dfs(k,n-1)
-
         return self.ans
 s = Solution()
 print(s.getPermutation(3,3))

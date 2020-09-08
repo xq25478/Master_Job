@@ -6,7 +6,6 @@
 import functools
 # @lc code=start
 class Solution:
-    
     @functools.lru_cache(maxsize=None)#lru缓存
     def myPow(self, x: float, n: int) -> float:
         if n == 0:

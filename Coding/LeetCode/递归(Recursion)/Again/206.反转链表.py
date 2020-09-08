@@ -20,4 +20,3 @@ class Solution:
         head.next = None
         return last
 # @lc code=end
-

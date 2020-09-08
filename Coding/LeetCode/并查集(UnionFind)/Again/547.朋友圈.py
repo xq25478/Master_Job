@@ -1,7 +1,7 @@
 #
-# @lc app=leetcode.cn id=721 lang=python3
+# @lc app=leetcode.cn id=547 lang=python3
 #
-# [721] 账户合并
+# [547] 朋友圈
 #
 from typing import List
 # @lc code=start
@@ -39,26 +39,14 @@ class UnionFind:
         return self.find(i) == self.find(j)
 
 class Solution:
-    def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
-        import collections
-        uf = UnionFind(10001)
-        em_to_name = {}
-        em_to_id = {}
-        i = 0 
+    def findCircleNum(self, M: List[List[int]]) -> int:
+        n = len(M)
+        uf = UnionFind(n)
 
-        for acc in accounts:
-            name = acc[0]
-            for email in acc[1:]:
-                em_to_name[email] = name
-                if email not in em_to_id:
-                    em_to_id[email] = i
-                    i += 1
-                uf.union(em_to_id[acc[1]],em_to_id[email])
-
-        ans = collections.defaultdict(list)
-        for email in em_to_name:
-            ans[uf.find(em_to_id[email])].append(email)
-
-        return [[em_to_name[v[0]]] + sorted(v) for v in ans.values()]
+        for i in range(n):
+            for j in range(n):
+                if M[i][j]==1:
+                    uf.union(i,j)
+                    
+        return uf.getCount()
 # @lc code=end
-

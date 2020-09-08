@@ -13,12 +13,12 @@ class ListNode:
 
 class Solution:
     def reverseBetween(self, head: ListNode, m: int, n: int) -> ListNode:
-
         def reverse(head:ListNode,length):
             nonlocal succerror
             if length == 1:
                 succerror = head.next
                 return head,None
+
             front,_ = reverse(head.next,length-1)
             head.next.next = head
             head.next = succerror

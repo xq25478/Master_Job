@@ -1,9 +1,9 @@
 #
-# @lc app=leetcode.cn id=547 lang=python3
+# @lc app=leetcode.cn id=990 lang=python3
 #
-# [547] 朋友圈
+# [990] 等式方程的可满足性
 #
-from typing import List
+
 # @lc code=start
 class UnionFind:
     def __init__(self,n):
@@ -37,18 +37,23 @@ class UnionFind:
 
     def connected(self,i,j)->bool:
         return self.find(i) == self.find(j)
-
+        
+from typing import List
 class Solution:
-    def findCircleNum(self, M: List[List[int]]) -> int:
-        n = len(M)
+    def equationsPossible(self, equations: List[str]) -> bool:
+        union_find = UnionFind(26)
 
-        uf = UnionFind(n)
+        for equation in equations:  #先建立等式
+            a = ord(equation[0]) - ord('a')
+            b = ord(equation[3]) - ord('a')
+            if equation[1] == '=':
+                union_find.union(a,b)
 
-        for i in range(n):
-            for j in range(n):
-                if M[i][j]==1:
-                    uf.union(i,j)
-                    
-        return uf.getCount()
+        for equation in equations:  #再检查不等式是否成立
+            a = ord(equation[0]) - ord('a')
+            b = ord(equation[3]) - ord('a')
+            if equation[1] == '!':
+                if union_find.connected(a,b):
+                    return False
+        return True
 # @lc code=end
-

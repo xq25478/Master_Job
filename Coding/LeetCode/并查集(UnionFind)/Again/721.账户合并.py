@@ -1,9 +1,9 @@
 #
-# @lc app=leetcode.cn id=990 lang=python3
+# @lc app=leetcode.cn id=721 lang=python3
 #
-# [990] 等式方程的可满足性
+# [721] 账户合并
 #
-
+from typing import List
 # @lc code=start
 class UnionFind:
     def __init__(self,n):
@@ -37,24 +37,27 @@ class UnionFind:
 
     def connected(self,i,j)->bool:
         return self.find(i) == self.find(j)
-        
-from typing import List
+
 class Solution:
-    def equationsPossible(self, equations: List[str]) -> bool:
-        union_find = UnionFind(26)
+    def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
+        import collections
+        uf = UnionFind(10001)
+        em_to_name = {}
+        em_to_id = {}
+        i = 0 
 
-        for equation in equations:  #先建立等式
-            a = ord(equation[0]) - ord('a')
-            b = ord(equation[3]) - ord('a')
-            if equation[1] == '=':
-                union_find.union(a,b)
+        for acc in accounts:
+            name = acc[0]
+            for email in acc[1:]:
+                em_to_name[email] = name
+                if email not in em_to_id:
+                    em_to_id[email] = i
+                    i += 1
+                uf.union(em_to_id[acc[1]],em_to_id[email])
 
-        for equation in equations:  #再检查不等式是否成立
-            a = ord(equation[0]) - ord('a')
-            b = ord(equation[3]) - ord('a')
-            if equation[1] == '!':
-                if union_find.connected(a,b):
-                    return False
-        return True
+        ans = collections.defaultdict(list)
+        for email in em_to_name:
+            ans[uf.find(em_to_id[email])].append(email)
+
+        return [[em_to_name[v[0]]] + sorted(v) for v in ans.values()]
 # @lc code=end
-
