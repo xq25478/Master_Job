@@ -26,13 +26,12 @@ class Solution:
             for k in range(i+1,j):
                 left = pre[k]-pre[i]
                 right = pre[j]-pre[k]
-
                 if left > right:
                     res = max(res,dfs(k,j)+right)
                 elif left < right:
                     res = max(res,dfs(i,k)+left)
                 else:
-                    res =  max(res,max(dfs(i,k),dfs(k,j))+left )
+                    res = max(res,max(dfs(i,k),dfs(k,j))+left )
             return res
 
         n = len(stoneValue)
@@ -41,4 +40,3 @@ class Solution:
             pre[i] = pre[i-1] + stoneValue[i-1]
 
         return dfs(0,n)
-        
