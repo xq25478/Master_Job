@@ -53,4 +53,3 @@ class Trie:
 # param_2 = obj.search(word)
 # param_3 = obj.startsWith(prefix)
 # @lc code=end
-

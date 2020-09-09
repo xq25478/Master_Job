@@ -27,13 +27,9 @@ class Solution:
                 ans.append(candidates[i])
                 backTrack(candidates,target-candidates[i],i)
                 ans.pop()
+                
         backTrack(candidates,target,0)
         return res
 s = Solution()
 print(s.combinationSum([2,3,5],8))
-# a= [14,2,1]
-# a.sort()
-# print(a)
-
-#print(s.combinationSum([2,3,6,7],7))
 # @lc code=end

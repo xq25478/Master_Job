@@ -8,7 +8,6 @@
 from typing import List
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
-
         res = []
         ans = []
 
@@ -24,7 +23,7 @@ class Solution:
                 ans.append('(')
                 backTrack(num_1-1,num_2)
                 ans.pop()
-
+                
             if num_2 >= 1:
                 ans.append(')')
                 backTrack(num_1,num_2-1)

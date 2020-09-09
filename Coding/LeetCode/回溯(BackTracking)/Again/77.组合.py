@@ -30,4 +30,3 @@ class Solution:
 # @lc code=end
 s =Solution()
 print(s.combine(4,2))
-
