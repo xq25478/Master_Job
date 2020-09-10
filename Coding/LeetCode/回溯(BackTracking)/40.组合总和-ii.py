@@ -22,7 +22,7 @@ class Solution:
             for i in range(index,n):
                 if  target-candidates[i] < 0 :#剪枝加速
                     return  
-                if i > 0 and candidates[i] == candidates[i-1] and visited[i-1]==False:
+                if i > index and candidates[i] == candidates[i-1] and visited[i-1]==False:
                     continue
                 ans.append(candidates[i])
                 visited[i] = True
