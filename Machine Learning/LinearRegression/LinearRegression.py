@@ -11,16 +11,16 @@ class LinearRegression:
         self.alpha = alpha
         self.num_iters = num_iters
         self.f_dir = file_dir
+        self.data = loadTxtAndCsvData(self.f_dir,',',dataType=np.float64)  #数据读取
 
     def numpy_fit(self):
         """训练函数
         """
         print('step1:loading data')
-        data = loadTxtAndCsvData(self.f_dir,',',dataType=np.float64)  #数据读取
-        X = data[:,0:-1]
-        y = data[:,-1]
+        X = self.data[:,0:-1]
+        y = self.data[:,-1]
         m = len(y)
-        col = data.shape[1]
+        col = self.data.shape[1]
 
         X,mu,sigma = featureNormalize(X)
         #plot2D(X)
@@ -36,9 +36,8 @@ class LinearRegression:
     def sklearnFit(self):
         """使用sklearn库进行学习
         """
-        data = loadTxtAndCsvData(self.f_dir,',',dataType=np.float64)  #数据读取
-        X = np.array(data[:,0:-1],dtype=np.float64)
-        y = np.array(data[:,-1],dtype=np.float64)
+        X = np.array(self.data[:,0:-1],dtype=np.float64)
+        y = np.array(self.data[:,-1],dtype=np.float64)
 
         #归一化操作
         scaler = StandardScaler()
