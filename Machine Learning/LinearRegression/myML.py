@@ -6,7 +6,6 @@ def computerCost(X,y,theta):
     :retype 代价值
     """
     m = len(y)
-    J = 0
     J = (np.transpose(X*theta-y)) * (X*theta-y)/(2*m)
     return J
 
