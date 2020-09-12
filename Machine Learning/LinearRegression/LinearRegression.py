@@ -21,7 +21,6 @@ class LinearRegression:
         y = self.data[:,-1]
         m = len(y)
         col = self.data.shape[1]
-
         X,mu,sigma = featureNormalize(X)
         #plot2D(X)
         X = np.hstack((np.ones((m,1)),X)) # 在X前面加一列1 
