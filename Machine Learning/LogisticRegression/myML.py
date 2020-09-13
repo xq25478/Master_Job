@@ -1,32 +1,40 @@
 import numpy as np
+from scipy import optimize
 
-def computerCost(X,y,theta):
+def sigmoid(z):
+    """sigmoid函数
+    """
+    h = np.zeros((len(z),1))
+    h = 1.0/(1.0+np.exp(-z))
+    return h
+
+def costFunction(initial_theta,X,y,initial_lambda):
     """计算代价函数
-    :type X 样本 y 标签 theta w矩阵
+    :type X 样本 y 标签 theta w矩阵 lambda 正则化系数
     :retype 代价值
     """
     m = len(y)
-    J = (np.transpose(X*theta-y)) * (X*theta-y)/(2*m)
+    h = sigmoid(np.dot(X,initial_theta))
+    theta1 = initial_theta.copy()
+    theta1[0] = 0
+
+    regular = np.dot(np.transpose(theta1),theta1)
+    J = (- np.dot(np.transpose(y),np.log(h))-np.dot(np.transpose(1-y),np.log(1-h))  + regular*initial_lambda/2)/m
     return J
 
-def gradientDescent(X,y,theta,alpha,num_iters):
+def gradientDescent(initial_theta,X,y,initial_lambda):
     """梯度下降算法实现
-    :type X 样本 y 标签 theta w 参数矩阵 alpha 学习率 num_iters 迭代次数
     :retype
     """
     m = len(y)
-    n = len(theta)
+    grid = np.zeros((initial_theta.shape[0]))
 
-    temp = np.matrix(np.zeros((n,num_iters)))
-    J_history = np.zeros((num_iters,1))
+    h = sigmoid(np.dot(X,initial_theta))
+    theta1 = initial_theta.copy()
+    theta1[0] = 0 
+    grid = np.dot(np.transpose(X),h-y)/m + initial_lambda/m*theta1
+    return grid
 
-    for i in range(num_iters):
-        h = np.dot(X,theta)
-        temp[:,i] =  theta - ((alpha/m)*(np.dot(np.transpose(X),h-y)))
-        theta = temp[:,i]
-        J_history[i] = computerCost(X,y,theta)
-
-    return theta,J_history        
 
 if __name__ == '__main__':
     print('module--myML')

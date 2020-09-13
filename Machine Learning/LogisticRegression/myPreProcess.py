@@ -15,22 +15,19 @@ def loadNpyData(filename:str):
     """  
     return np.load(filename)
 
-def featureNormalize(X):
-    """ 特征归一化
-    :type X:原始数据
-    :retype 归一化的数据
-    """    
-    X_norm = np.array(X)
-    mu    = np.zeros((1,X.shape[1]))
-    sigma = np.zeros((1,X.shape[1]))
-
-    mu    = np.mean(X_norm,0)  #每一列的平均值
-    sigma = np.std(X_norm,0) #每一列的标准差
-
-    for i in range(X.shape[1]): #每一行归一化
-        X_norm[:,i] = (X_norm[:,i]-mu[i])/sigma[i]
-
-    return X_norm,mu,sigma
+def mapFeature(X1,X2):
+    """映射为多项式
+    """
+    degree = 2
+    out = np.ones((X1.shape[0],1))
+    '''
+    这里以degree=2为例，映射为1,x1,x2,x1^2,x1,x2,x2^2
+    '''
+    for i in np.arange(1,degree+1):
+        for j in range(i+1):
+            temp = X1**(i-j)*(X2**j)
+            out = np.hstack((out,temp.reshape(-1,1)))
+    return out
 
 #二维画图
 def plot_data(X,y):
@@ -43,16 +40,27 @@ def plot_data(X,y):
     plt.title("classes")
     plt.show()
 
-def plotJ(J_history,num_iters):
-    """代价曲线图
-    :type J_his 代价值 num_iters 当前迭代次数
-    :rtype NOne
-    """
-    x = np.arange(1,num_iters+1)
-    plt.plot(x,J_history)
-    plt.xlabel(u"iters") # 注意指定字体，要不然出现乱码问题
-    plt.ylabel(u"Cost")
-    plt.title(u"Cost vs Iters")
+#画决策边界
+def plotDecisionBoundary(theta,X,y):
+    pos = np.where(y==1)    #找到y==1的坐标位置
+    neg = np.where(y==0)    #找到y==0的坐标位置
+    #作图
+    plt.figure(figsize=(15,12))
+    plt.plot(X[pos,0],X[pos,1],'ro')        # red o
+    plt.plot(X[neg,0],X[neg,1],'bo')        # blue o
+    plt.title("DecisionBoundary")
+    
+    u = np.linspace(-1,1.5,50)  #根据具体的数据，这里需要调整
+    v = np.linspace(-1,1.5,50)
+    
+    z = np.zeros((len(u),len(v)))
+    for i in range(len(u)):
+        for j in range(len(v)):
+            z[i,j] = np.dot(mapFeature(u[i].reshape(1,-1),v[j].reshape(1,-1)),theta)    # 计算对应的值，需要map
+    
+    z = np.transpose(z)
+    plt.contour(u,v,z,[0,0.01])   # 画等高线，范围在[0,0.01]，即近似为决策边界
+    #plt.legend()
     plt.show()
 
 if __name__ == '__main__':
