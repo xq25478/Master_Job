@@ -2,12 +2,16 @@ import numpy as np
 from scipy import optimize
 from myPreProcess import loadTxtAndCsvData,plot_data,mapFeature,plotDecisionBoundary
 from myML import gradientDescent,costFunction,sigmoid
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.preprocessing import StandardScaler
 
-class LogisticRegression:
+class _LogisticRegression:
     def __init__(self,file_dir,initial_lambda = 0.1):
         self.f_dir = file_dir
         self.data = loadTxtAndCsvData(self.f_dir,',',dataType=np.float64)  #数据读取
         self.initial_lambda = initial_lambda
+
     # 预测
     def predict(self,X,theta):
         m = X.shape[0]  #样本数量
@@ -21,7 +25,7 @@ class LogisticRegression:
                 p[i] = 0
         return p
 
-    def fit(self):
+    def numpy_fit(self):
         X = self.data[:,0:-1]
         y = self.data[:,-1]
         plot_data(X,y) #作图
@@ -43,7 +47,32 @@ class LogisticRegression:
         
         X = self.data[:,0:-1]
         y = self.data[:,-1]    
-        plotDecisionBoundary(result,X,y)    #画决策边界  
+        plotDecisionBoundary(result,X,y)    #画决策边界 
 
-model = LogisticRegression(r'E:\GitHub\Job\Machine Learning\LogisticRegression\data2.txt',initial_lambda=0.005)
-model.fit()
+    def scikit_fit(self):
+        X = self.data[:,0:-1]
+        y = self.data[:,-1]
+
+        #划分为训练集和测试集
+        x_train,x_test,y_train,y_test = train_test_split(X,y,test_size=0.2)
+
+        #归一化
+        scaler = StandardScaler()
+        x_train = scaler.fit_transform(x_train)
+        x_test = scaler.fit_transform(x_test)
+
+        #逻辑回归
+        model = LogisticRegression()
+        model.fit(x_train,y_train)
+
+        #预测
+        predict = model.predict(x_test)
+        right = sum(predict==y_test)
+        predict = np.hstack((predict.reshape(-1,1),y_test.reshape(-1,1)))   # 将预测值和真实值放在一块，好观察
+        print(predict)
+        print('acc by sklearn %f%%'%(right*100.0/predict.shape[0]))          # 计算在测试集上的准确度
+
+model = _LogisticRegression(r'E:\GitHub\Job\Machine Learning\LogisticRegression\data2.txt',initial_lambda=0.005)
+model.numpy_fit()
+model = _LogisticRegression(r'E:\GitHub\Job\Machine Learning\LogisticRegression\data1.txt',initial_lambda=0.005)
+model.scikit_fit()
