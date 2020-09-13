@@ -45,5 +45,5 @@ class LogisticRegression:
         y = self.data[:,-1]    
         plotDecisionBoundary(result,X,y)    #画决策边界  
 
-model = LogisticRegression('data2.txt',initial_lambda=0.005)
+model = LogisticRegression(r'E:\GitHub\Job\Machine Learning\LogisticRegression\data2.txt',initial_lambda=0.005)
 model.fit()

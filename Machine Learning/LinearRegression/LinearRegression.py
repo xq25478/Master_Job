@@ -7,11 +7,13 @@ from sklearn import linear_model
 from sklearn.preprocessing import StandardScaler
 
 class LinearRegression:
-    def __init__(self,file_dir,alpha,num_iters = 400):
+    def __init__(self,file_dir,alpha,num_iters = 400,regularization=False,r = 0.01):
         self.alpha = alpha
         self.num_iters = num_iters
         self.f_dir = file_dir
         self.data = loadTxtAndCsvData(self.f_dir,',',dataType=np.float64)  #数据读取
+        self.regularization = regularization #引入正则化
+        self.r = r
 
     def numpy_fit(self):
         """训练函数
@@ -28,7 +30,7 @@ class LinearRegression:
         print('step2:running gradient descent')
         theta = np.zeros((col,1))
         y = y.reshape(-1,1)
-        theta,J_history = gradientDescent(X,y,theta,self.alpha,self.num_iters)
+        theta,J_history = gradientDescent(X,y,theta,self.alpha,self.num_iters,regularization=self.regularization,r=self.r)
         plotJ(J_history,self.num_iters)
         return mu,sigma,theta
 
@@ -69,7 +71,7 @@ class LinearRegression:
 
 if __name__ == "__main__":
     print('*************numpy machine learning***********')
-    lr = LinearRegression("./data.txt",0.01,600)
+    lr = LinearRegression(r'E:\GitHub\Job\Machine Learning\LinearRegression\data.txt',0.01,600,regularization=True,r = 0.01)
     mu,sigma,theta = lr.numpy_fit()
     print ("theta:\n",theta)
     print ("predict:%f"%lr.predict(mu, sigma, theta))
