@@ -17,7 +17,6 @@ class _LogisticRegression:
         m = X.shape[0]  #样本数量
         p = np.zeros((m,1))
         p = sigmoid(np.dot(X,theta))    # 预测的结果，是个概率值
-        
         for i in range(m):
             if p[i] > 0.5:  #概率大于0.5预测为1，否则预测为0
                 p[i] = 1
@@ -72,7 +71,7 @@ class _LogisticRegression:
         print(predict)
         print('acc by sklearn %f%%'%(right*100.0/predict.shape[0]))          # 计算在测试集上的准确度
 
-model = _LogisticRegression(r'E:\GitHub\Job\Machine Learning\LogisticRegression\data2.txt',initial_lambda=0.005)
-model.numpy_fit()
+# model = _LogisticRegression(r'E:\GitHub\Job\Machine Learning\LogisticRegression\data2.txt',initial_lambda=0.005)
+# model.numpy_fit()
 model = _LogisticRegression(r'E:\GitHub\Job\Machine Learning\LogisticRegression\data1.txt',initial_lambda=0.005)
 model.scikit_fit()
