@@ -16,20 +16,6 @@ def loadNpyData(filename:str):
     """  
     return np.load(filename)
 
-def mapFeature(X1,X2):
-    """映射为多项式
-    """
-    degree = 2
-    out = np.ones((X1.shape[0],1))
-    '''
-    这里以degree=2为例，映射为1,x1,x2,x1^2,x1,x2,x2^2
-    '''
-    for i in np.arange(1,degree+1):
-        for j in range(i+1):
-            temp = X1**(i-j)*(X2**j)
-            out = np.hstack((out,temp.reshape(-1,1)))
-    return out
-
 #二维画图
 def plot_data(X,y):
     pos = np.where(y==1)    #找到y==1的坐标位置
@@ -88,10 +74,22 @@ def display_data(imgData):
     plt.axis('off')
     plt.show()
 
-
+def mapFeature(X1,X2):
+    """映射为多项式
+    """
+    degree = 2
+    out = np.ones((X1.shape[0],1))
+    '''
+    这里以degree=2为例，映射为1,x1,x2,x1^2,x1,x2,x2^2
+    '''
+    for i in np.arange(1,degree+1):
+        for j in range(i+1):
+            temp = X1**(i-j)*(X2**j)
+            out = np.hstack((out,temp.reshape(-1,1)))
+    return out
 
 if __name__ == '__main__':
     print('module:myPreProcess')
     print('author:XiaoQi')
-    print('date:2020.09.10')
-    print('LinearRegression PreProcess functions')
+    print('date:2020.09.13')
+    print('Logisticgression PreProcess functions')

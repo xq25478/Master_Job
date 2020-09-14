@@ -8,6 +8,11 @@ def sigmoid(z):
     h = 1.0/(1.0+np.exp(-z))
     return h
 
+def sigmoidGradient(z):
+    s = sigmoid(z)
+    g = s*(1-s)
+    return g
+
 def costFunction(initial_theta,X,y,initial_lambda):
     """计算代价函数
     :type X 样本 y 标签 theta w矩阵 lambda 正则化系数
@@ -81,5 +86,5 @@ def oneVsAll(X,y,num_labels,Lambda):
 if __name__ == '__main__':
     print('module--myML')
     print('author:XiaoQi')
-    print('date:2020.09.10')
-    print('LinearRegression train functions')
+    print('date:2020.09.13')
+    print('LogisitcRegression train functions')
