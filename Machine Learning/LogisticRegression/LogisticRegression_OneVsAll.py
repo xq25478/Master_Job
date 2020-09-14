@@ -5,6 +5,8 @@ from scipy import optimize
 from myPreProcess import loadmat_data,display_data
 from myML import  predict_oneVsAll,oneVsAll
 from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 
 class LogisticRegression_OneVsAll:
     def __init__(self,f_dir):
@@ -32,11 +34,24 @@ class LogisticRegression_OneVsAll:
     def scikit_fit(self):
         X = self.data['X']
         y = self.data['y']
-        y = np.ravel(y)
+        x_train,x_test,y_train,y_test = train_test_split(X,y,test_size=0.2)
+
+        #归一化
+        scaler = StandardScaler()
+        x_train = scaler.fit_transform(x_train)
+        x_test = scaler.fit_transform(x_test)
+        y_train = np.ravel(y_train)
+        y_test = np.ravel(y_test)
+        """
+        np.ravel   将多维数组降为一维 返回视图 修改原数组
+        np.flatten 将多维数组降为一维 不修改原数组
+        """
         model = LogisticRegression()
-        model.fit(X,y) #拟合
-        predict = model.predict(X)
-        print(u"acc of sklearn %f%%"%np.mean(np.float64(predict == y)*100))
+
+        #划分为训练集和测试集
+        model.fit(x_train,y_train) #拟合
+        predict = model.predict(x_test)
+        print(u"acc of sklearn %f%%"%np.mean(np.float64(predict == y_test)*100))
 
 
 lr = LogisticRegression_OneVsAll(r'E:\GitHub\Job\Machine Learning\LogisticRegression\data_digits.mat')
