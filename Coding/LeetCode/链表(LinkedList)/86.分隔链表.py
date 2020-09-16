@@ -10,7 +10,7 @@ class ListNode:
     def __init__(self, x):
         self.val = x
         self.next = None
-
+        
 class Solution:
     def partition(self, head: ListNode, x: int) -> ListNode:
         biger = []
@@ -32,8 +32,8 @@ class Solution:
 
         cur = root
         for i in range(len(ret)):
-            new = ListNode(ret[i])
-            cur.next = new
+            # new = ListNode(ret[i])
+            cur.next = ListNode(ret[i])
             cur = cur.next
 
         return root.next
