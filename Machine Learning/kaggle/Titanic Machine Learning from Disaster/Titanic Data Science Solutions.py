@@ -27,6 +27,7 @@ from sklearn.linear_model import Perceptron
 from sklearn.linear_model import SGDClassifier
 from sklearn.tree import DecisionTreeClassifier
 
+#########################数据获取##############################
 train_df = pd.read_csv(r'E:\GitHub\Job\Machine Learning\kaggle\Titanic Machine Learning from Disaster\train.csv')
 test_df  = pd.read_csv(r'E:\GitHub\Job\Machine Learning\kaggle\Titanic Machine Learning from Disaster\test.csv')
 combine = [train_df,test_df]
