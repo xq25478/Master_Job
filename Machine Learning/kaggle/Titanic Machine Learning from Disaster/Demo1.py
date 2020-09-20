@@ -38,8 +38,8 @@ def randomForestClassifier():
     model.fit(X,y)
     predictions = model.predict(X_test)
     out = pd.DataFrame({'PassengerId':test_data.PassengerId,'Survived':predictions})
-    out.to_csv(r'E:\GitHub\Job\Machine Learning\kaggle\Titanic Machine Learning from Disaster\randomForestClassifier.csv',index = False)
-    print('Saved in randomForestClassifier.csv!')
+    out.to_csv(r'E:\GitHub\Job\Machine Learning\kaggle\Titanic Machine Learning from Disaster\Demo1_randomForestClassifier.csv',index = False)
+    print('Saved in csv file!')
 
 if __name__ == '__main__':
     # 数据加载
