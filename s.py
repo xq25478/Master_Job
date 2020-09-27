@@ -2,6 +2,7 @@ def Solution(graph):
     def find(x):
         while x != uf[x]:
             x = uf[x]
+            uf[x] = uf[uf[x]]  #路径压缩
         return x
 
     hash = {}
@@ -31,7 +32,7 @@ def Solution(graph):
 
         uf[hash[b]] = hash[a]
 
-        if find(uf[hash[a]]) == hash[b]:
+        if find(hash[a]) == hash[b]:
             return -1
 
     return 0
