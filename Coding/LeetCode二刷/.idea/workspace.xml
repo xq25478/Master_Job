@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8e7b6fd6-ebf5-4dda-90d2-9653e0352c14" name="Default Changelist" comment="" />
+    <list default="true" id="8e7b6fd6-ebf5-4dda-90d2-9653e0352c14" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/剑指offer系列/50.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LeetCode/哈希表(Hash)/49.字母异位词分组.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LeetCode/哈希表(Hash)/532.数组中的k-diff数对.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LeetCode/哈希表(Hash)/5508. 数的平方等于两数乘积的方法数.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LeetCode/哈希表(Hash)/771.宝石与石头.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LeetCode/哈希表(Hash)/b_哈希表-01两数之和.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LeetCode/哈希表(Hash)/剑指 Offer 50. 第一个只出现一次的字符.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LeetCode/哈希表(Hash)/哈希表-041寻找第一个丢失的正整数.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -19,7 +29,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../LeetCode" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -108,5 +118,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

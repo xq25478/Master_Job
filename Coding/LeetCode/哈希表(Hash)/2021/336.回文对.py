@@ -22,9 +22,9 @@ class Solution:
             if word:
                 for i in range(len(word)):
                     left,right = word[:i],word[i:]
-                    if left == left[::-1] and right in rev_words and idx != rev_words[right]:
+                    if left == left[::-1] and right in rev_words and idx != rev_words[right]:#左边回文 右边与其他构成回文  整体回文
                         res.append([rev_words[right],idx])
-                    if right == right[::-1] and left in rev_words and idx != rev_words[left]:
+                    if right == right[::-1] and left in rev_words and idx != rev_words[left]:#右边回文 左边与其他构成回文  整体回文
                         res.append([idx,rev_words[left]])
             else:
                 #空串与回文串(但不是本身)组成一对
