@@ -87,7 +87,7 @@ class GoogLeNet(nn.Module):
         self.aux_logits = aux_logits
         self.transform_input = transform_input
 
-        self.conv1 = conv_block(3, 64, kernel_size=7, stride=2, padding=3)
+        self.conv1 = conv_block(3, 64, kernel_size=7, stride=2, padding=3) # o = (224-7+2*3) + 1 = 112
         self.maxpool1 = nn.MaxPool2d(3, stride=2, ceil_mode=True)
         self.conv2 = conv_block(64, 64, kernel_size=1)
         self.conv3 = conv_block(64, 192, kernel_size=3, padding=1)
