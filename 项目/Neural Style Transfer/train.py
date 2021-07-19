@@ -26,7 +26,7 @@ import torch.optim as optim
 
 import torchvision.models as models
 import copy
-from loss import ContentLoss, GramMatrix, StyleLoss
+from .loss import ContentLoss, GramMatrix, StyleLoss
 
 import torchvision.transforms as transforms
 from torch.autograd import Variable
@@ -34,7 +34,7 @@ from torch.autograd import Variable
 import os
 from PIL import Image
 import numpy as np
-from ssim import ssim
+from .ssim import ssim
 import torch
 import torch.nn as nn
 
@@ -123,7 +123,7 @@ def get_style_model_and_losses(cnn, style_img, content_img, style_weight=1000, c
         gram = gram.cuda()
     i = 0
     for layer in list(cnn):
-        #rint(layer)
+        #print(layer)
         name = "conv_" + str(i)
         Net.add_module(name, layer)
         if name in content_layers:
@@ -209,8 +209,7 @@ for _c in content_imgs:
             input_img = image_loader(CONTENT_PATH, imsize).type(dtype)
             #input_img = Variable(torch.randn(content_img.data.size())).type(dtype)
             input_size = Image.open(CONTENT_PATH).size
-            assert style_img.size() == content_img.size(), \
-                "we need to import style and content images of the same size"
+            assert style_img.size() == content_img.size(),"we need to import style and content images of the same size"
             cnn = models.densenet121(pretrained=True)
             cnn.apply(weights_init_normal)
             model = cnn.features
@@ -221,5 +220,4 @@ for _c in content_imgs:
             name_content, ext = os.path.splitext(os.path.basename(CONTENT_PATH))
             name_style, _ = os.path.splitext(os.path.basename(STYLE_PATH))
             fname = name_content+'-'+name_style+ext
-
             save_image(output, size=input_img.data.size()[1:], input_size=input_size, fname=fname)

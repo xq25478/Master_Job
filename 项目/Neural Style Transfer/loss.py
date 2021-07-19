@@ -23,7 +23,6 @@ class ContentLoss(nn.Module):
         return self.loss
 
 class GramMatrix(nn.Module):
-
     def forward(self, input):
         a, b, c, d = input.size()  # a=batch size(=1)
         # b=number of feature maps
